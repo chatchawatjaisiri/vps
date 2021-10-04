@@ -2,10 +2,6 @@ name: Educlick windows RDP For Dev
 
 on: 
   workflow_dispatch:
-    inputs:
-      ngrok:
-        description: 'Enter Ngrok tunnel key'
-        required: true
 
 jobs:
   build:
