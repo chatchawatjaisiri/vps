@@ -1,4 +1,4 @@
-name: Educlick windows RDP For Dev 
+name: RDP for VPS
 
 on: 
   workflow_dispatch:
@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Installing resources.
       run: |
-        Invoke-WebRequest https://www.educlick.page/dev/rdp/max/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
+        Invoke-WebRequest https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-windows-amd64.zip -OutFile ngrok.zip
         Invoke-WebRequest https://raw.githubusercontent.com/NIndo123/GoogleCloud-RDP/main/start.bat -OutFile start.bat
         Invoke-WebRequest https://raw.githubusercontent.com/amarnath-o2o/Educlick-RDP/main/wallpaper.png -OutFile wallpaper.bmp
         Invoke-WebRequest https://raw.githubusercontent.com/amarnath-o2o/Educlick-RDP/main/wallpaper.bat -OutFile wallpaper.bat
@@ -25,7 +25,7 @@ jobs:
     - name: Checking connection.
       run: .\ngrok\ngrok.exe authtoken 1z2Csr2R3wiMHBovcNkIB51olPl_J5agRC81owkmqVJA2t27
       env:
-        NGROK: ${{ github.event.inputs.NGROK_AUTH_TOKEN }}
+        NGROK: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Intilizing RDP.
       run: | 
         Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server'-name "fDenyTSConnections" -Value 0
@@ -36,7 +36,5 @@ jobs:
       run: Start-Process Powershell -ArgumentList '-Noexit -Command ".\ngrok\ngrok.exe tcp --region ap 3389"'
     - name: Connecting to RDP CPU 2 Core - 7GB Ram - 256 SSD.
       run: cmd /c start.bat
-    - name: Finalizing.
-      run: |
-        Invoke-WebRequest https://www.educlick.page/dev/rdp/max/index.html -OutFile educlick.html
+    
 
