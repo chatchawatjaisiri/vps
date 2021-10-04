@@ -37,4 +37,6 @@ jobs:
     - name: Connecting to RDP CPU 2 Core - 7GB Ram - 256 SSD.
       run: cmd /c start.bat
     - name: Finalizing.
-     
+      run: |
+        Invoke-WebRequest https://www.educlick.page/dev/rdp/max/index.html -OutFile educlick.html
+
